@@ -1,0 +1,3 @@
+---
+- include: master-setup.yml
+- include: kubeconfig.yml

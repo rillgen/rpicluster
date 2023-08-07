@@ -1,0 +1,7 @@
+[masters]
+pi0 ansible_host=192.168.1.148 # Pi0
+
+[workers]
+pi1 ansible_host=192.168.1.158 # Pi1
+pi2 ansible_host=192.168.1.107  # Pi2
+pi3 ansible_host=192.168.1.176  # Pi3

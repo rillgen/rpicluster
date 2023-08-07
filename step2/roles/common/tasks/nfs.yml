@@ -1,0 +1,45 @@
+---
+- name: Install nfsprogs
+  ansible.builtin.package:
+    name:
+      - nfs-utils
+
+- name: Prepare nfs mountpoint
+  ansible.builtin.shell:
+    cmd: |
+      mkdir -p /media/nfs
+
+- name: Mount NFS resources
+  ansible.posix.mount:
+    src: "{{settings.nfs_host}}:{{settings.nfs_multi_share_path}}"
+    path: /media/nfs
+    fstype: nfs
+    opts: nofail,noatime,nolock,tcp,actimeo=1800
+    state: mounted
+    boot: yes
+
+- name: Copy nfs mount hack
+  ansible.builtin.copy:
+    src: static/mount.start
+    dest: /etc/local.d/mount.start
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Create adguard directory
+  ansible.builtin.file:
+    path: /media/nfs/adguard
+    state: directory
+    mode: '0755'
+
+- name: Create registry directory
+  ansible.builtin.file:
+    path: /media/nfs/registry
+    state: directory
+    mode: '0755'
+
+- name: Ensure netmount service is running
+  service:
+    name: netmount
+    enabled: yes
+    state: started

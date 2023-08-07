@@ -1,0 +1,21 @@
+---
+- hosts: all
+  vars:
+    settings:
+      nfs_host: 192.168.1.1
+      nfs_multi_share_path: "//mnt/sda/share"
+      pimoroni_fans_enabled: "disabled"
+  roles:
+    - common
+
+- hosts: masters
+  roles:
+    - kubemaster
+
+- hosts: workers
+  roles:
+    - kubeworkers
+
+- hosts: masters
+  roles:
+    - basics

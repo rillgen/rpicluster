@@ -1,0 +1,8 @@
+---
+- hosts: masters
+  roles:
+    - kubemaster
+
+# - hosts: workers
+#   roles:
+#     - kubeworkers

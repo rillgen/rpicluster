@@ -1,0 +1,5 @@
+k3s:
+  release_version: "v1.27.3+k3s1"
+  node_token: "my_secret_node_token"
+  kubeconfig_context: "home-k8s"
+  kubeconfig_server: "{{hostvars[groups['masters'][0]].ansible_host}}:6443"

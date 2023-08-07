@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteUDP
+metadata:
+  name: adguard-traefik-udp
+  namespace: adguard
+
+spec:
+  entryPoints:
+    - dnsentry
+  routes:
+  - services:
+    - name: adguard-fwd-udp
+      port: 53
